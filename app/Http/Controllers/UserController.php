@@ -15,7 +15,10 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('users.index', compact('users'));
+        return response()->json([
+            "status" => 200,
+            "message" => "data successfully sent"
+        ], 200);
     }
 
     /**
@@ -29,9 +32,12 @@ class UserController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        User::create($request->all());
+        $user = User::create($request->all());
 
-        return redirect()->route('users.index');
+        return response()->json([
+            "status" => 201,
+            "message" => "$user->name is successfully registered"
+        ], 201);
     }
 
     /**
@@ -41,7 +47,11 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('users.show', compact('user'));
+        return response()->json([
+            "status" => 200,
+            "message" => "data successfully sent",
+            "user" => $user
+        ], 200);
     }
 
     /**

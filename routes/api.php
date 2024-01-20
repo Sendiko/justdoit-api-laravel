@@ -21,4 +21,5 @@ Route::post("login", [UserController::class, "login"]);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource("/task", TaskController::class);
+    Route::resource("/user", UserController::class);
 });

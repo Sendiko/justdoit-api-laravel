@@ -17,7 +17,8 @@ class UserController extends Controller
 
         return response()->json([
             "status" => 200,
-            "message" => "data successfully sent"
+            "message" => "data successfully sent",
+            "users" => $users
         ], 200);
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' =>'required|string',
-            'email' =>'required|email',
+            'email' =>'required|email|unique:users,email',
             'password' => 'required|confirmed',
         ]);
 
@@ -137,6 +138,16 @@ class UserController extends Controller
             "message" => "Successfully logged in",
             "token" => $token,
             "user" => $user,
+        ]);
+    }
+
+    public function logout() {
+        auth("sanctum")->user()->tokens()->delete();
+        return response()->json([
+            "status" => 200,
+            "message" => "berhasil logout",
+            "token" => "null",
+            "token_type" => "null"
         ]);
     }
 }

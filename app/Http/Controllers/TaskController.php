@@ -31,6 +31,7 @@ class TaskController extends Controller
             "title" => "string|required",
             "description" => "string",
             "user_id" => "string|required",
+            "is_done" => "boolean|integer",
         ]);
 
         $task = Task::create($validated);
@@ -64,6 +65,7 @@ class TaskController extends Controller
         $validated = $request->validate([
             "title" => "string",
             "description" => "string",
+            "is_done" => "string",
         ]);
 
         $task = Task::findOrFail($id);
@@ -84,7 +86,7 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
 
-        $task->destroy();
+        $task->delete();
 
         return response()->json([
             "status" => "200",

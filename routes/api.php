@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -23,4 +23,5 @@ Route::post("logout", [UserController::class, "logout"]);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource("/task", TaskController::class);
     Route::resource("/user", UserController::class);
+    Route::resource('/category', CategoryController::class);
 });

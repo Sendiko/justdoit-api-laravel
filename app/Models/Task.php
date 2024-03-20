@@ -19,7 +19,8 @@ class Task extends Model
         'user_id',
         'is_done',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'category'
     ];
 
     /**
